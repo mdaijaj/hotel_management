@@ -11,13 +11,10 @@ const {authenticate}= require('../middleware/index')
 const {login_required}= require('../middleware/index')
 
 
-
-
 // middleware
 router.use(express.static(__dirname + '/public'));
 // router.use('/uploads', express.static('uploads'));
 // const upload = multer({ dest: 'uploads/' })
-
 
 
 //users routes
@@ -27,9 +24,6 @@ router.get('/logout', login_required, user.logout)
 router.get('/allUsers', user.allUsers)
 router.put('/updateuser/:id', login_required, user.updateUser)
 router.get('/userdetails/:id', login_required, user.userDetails)
-// router.post('/forgetPassword', user.forgetPassword)
-// router.put('/resetPassword/:token', user.resetPassword)
-// router.put('/updatePassword', authenticate, user.updatePassword)
 
 
 //routes for hotel crude admin

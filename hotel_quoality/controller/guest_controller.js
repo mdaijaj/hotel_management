@@ -1,6 +1,6 @@
 const Guest= require('../model/guest_schema')
 
-//add product
+//add guest
 const addGuest= async (req, res)=>{
     try{
         const hotelData= await Guest.create(req.body)
@@ -15,6 +15,7 @@ const addGuest= async (req, res)=>{
 }
 
 
+//see all guest
 const allGuest= async (req, res)=>{
     try{
         const showData= await Guest.find()
@@ -29,6 +30,7 @@ const allGuest= async (req, res)=>{
 }
 
 
+// get guest inforation using id
 const guestDetails= async (req, res)=>{
     try{
         console.log(req.params._id)
@@ -49,6 +51,7 @@ const guestDetails= async (req, res)=>{
 }
 
 
+// delete guest information
 const deleteGuest= async (req, res)=>{
     try{    
         const deleteInf=await Guest.findByIdAndRemove({_id: req.params.id});

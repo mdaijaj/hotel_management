@@ -1,6 +1,6 @@
 const Hotels= require('../model/hotel_schema')
 
-//add product
+//add hotel admin only
 const addHotel= async (req, res)=>{
     try{
         const hotelData= await Hotels.create(req.body)
@@ -15,6 +15,7 @@ const addHotel= async (req, res)=>{
 }
 
 
+// all hotels get information
 const allHotels= async (req, res)=>{
     try{
         const hotelData= await Hotels.find()
@@ -29,6 +30,7 @@ const allHotels= async (req, res)=>{
 }
 
 
+// one hotel get details
 const hotelDetails= async (req, res)=>{
     try{
         console.log(req.params._id)
@@ -49,7 +51,7 @@ const hotelDetails= async (req, res)=>{
 }
 
     
-//update product information
+//update hotel information
 const updateHotel= async(req,res)=>{
     try{
         const {hotel_name,description,price,images,hotelType}=req.body
@@ -67,6 +69,7 @@ const updateHotel= async(req,res)=>{
 }
 
 
+//delete hotels details
 const deleteHotel= async (req, res)=>{
     try{    
         const deleteInf=await Hotels.findByIdAndRemove({_id: req.params.id});

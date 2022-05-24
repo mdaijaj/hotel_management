@@ -1,6 +1,6 @@
 const Service= require('../model/service_schema')
 
-//add product
+//add service
 const addService= async (req, res)=>{
     try{
         const serviceData= await Service.create(req.body)
@@ -15,6 +15,7 @@ const addService= async (req, res)=>{
 }
 
 
+// all service
 const allServices= async (req, res)=>{
     try{
         const serviceData= await Service.find()
@@ -29,6 +30,7 @@ const allServices= async (req, res)=>{
 }
 
 
+//one hotel service details
 const serviceDetails= async (req, res)=>{
     try{
         console.log(req.params._id)
@@ -68,6 +70,7 @@ const updateService= async(req,res)=>{
 }
 
 
+//delete service information
 const deleteService= async (req, res)=>{
     try{    
         const deleteInf=await Service.findByIdAndRemove({_id: req.params.id});

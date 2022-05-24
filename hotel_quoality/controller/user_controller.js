@@ -2,6 +2,8 @@ const Bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const User= require('../model/user_schema');
 
+
+//signup user
 const signup= async (req,res)=>{
     try{
         const {
@@ -38,6 +40,7 @@ const signup= async (req,res)=>{
 }
 
 
+//login
 const login= async (req,res)=>{
     try{
         const {email, password}=req.body;
@@ -82,6 +85,7 @@ const login= async (req,res)=>{
     } 
 }
 
+//all users information
 const allUsers= async (req,res)=>{
     try{
         const allData=await User.find()
@@ -101,12 +105,14 @@ const about= async(req,res)=>{
     res.send(req.userRouter);
 }
 
+// home page
 const home= async(req,res)=>{
     console.log("hello about page...")
     res.send(req.userRouter);
 }
 
 
+//logout page
 const logout= async(req,res)=>{
     console.log("logout")
     res.clearCookie("jwtToken", {path: '/'})
@@ -133,6 +139,7 @@ const updateUser= async(req,res)=>{
 }
 
 
+//user details
 const userDetails= async (req, res)=>{
     try{
         console.log(req.params._id)
