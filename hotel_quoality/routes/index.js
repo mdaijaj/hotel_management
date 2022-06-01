@@ -27,7 +27,7 @@ router.get('/userdetails/:id', login_required, user.userDetails)
 
 
 //routes for hotel crude admin
-router.post('/addhotel',login_required, hotel.addHotel)
+router.post('/addhotel', hotel.addHotel)
 router.get('/allhotels', hotel.allHotels)
 router.get('/hoteldetails/:id', hotel.hotelDetails)
 router.put('/updatehotel/:id',login_required, hotel.updateHotel)

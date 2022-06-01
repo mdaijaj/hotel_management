@@ -1,68 +1,128 @@
+import React, {useState} from "react";
+import axios from 'axios'
 
 const AddHotel = () => {
+    const [hoteldata, setHoteldata] = useState({
+        hotel_name: "",
+        description: "",
+        email: "",
+        password: "",
+        address: "",
+        contactNo: "",
+        rent: "",
+        hoteltype: "",
+        role: "",
+    });
+    
+    let name, value;
+    const handleInputs= async(event)=>{
+        name= event.target.name
+        value= event.target.value
+        console.log("value", value)
+        setHoteldata({...hoteldata, [name]: value})  //[] dynamic data for
+    }
+
+
+    const addhotelInf= async(e)=>{
+        e.preventDefault();
+        const {hotel_name, description, email, password, address, contactNo, rent, hoteltype,role}= hoteldata ;
+        const hotelInf= {hotel_name, description,email, password, address, contactNo, rent, hoteltype, role}
+        console.log("hoteldata", hotelInf)
+        // const requestOptions = {
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(
+        //         hotel_name,
+        //         description,
+        //         email,
+        //         password,
+        //         address,
+        //         contactNo,
+        //         rent,
+        //         hoteltype,
+        //         role
+        //     )
+        // };
+        const res= await axios.post('/addhotel', {hotelInf})
+        console.log("res", res)
+        if(res.status===400 || !res){
+            window.alert("Invalid Registration");
+            console.log("Invalid Registration")
+        }
+        else{
+            window.alert("add hotel successfully!")
+            console.log("add hotel is successfully")
+            // history.push('/home')
+        }
+    }
 
     return (
-        <form class="row g-3">
-            <div class="col-md-3">
-                <label for="inputEmail4" class="form-label">Hotel Name</label>
-                <input type="email" class="form-control" id="inputEmail4" />
+        <form method="Post" className="row g-3">
+            <div className="col-md-3">
+                <label for="hotel_name" className="form-label">Hotel Name</label>
+                <input type="text" className="form-control" name="hotel_name"  onChange= {handleInputs} id="hotel_name" />
             </div>
-            <div class="col-md-3">
-                <label for="inputPassword4" class="form-label">Description</label>
-                <input type="password" class="form-control" id="inputPassword4" />
+            <div className="col-md-3">
+                <label for="description" className="form-label">Description</label>
+                <input type="text" className="form-control" name="description" onChange= {handleInputs} id="description" />
             </div>
-            <div class="col-md-3">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" />
+            <div className="col-md-3">
+                <label for="inputEmail4" className="form-label">Email</label>
+                <input type="email" className="form-control" name="email" onChange= {handleInputs} id="inputEmail4" />
             </div>
-            <div class="col-md-3">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4" />
+            <div className="col-md-3">
+                <label for="inputPassword4" className="form-label">Password</label>
+                <input type="password" className="form-control" name="inputPassword4" onChange= {handleInputs} id="inputPassword4" />
             </div>
-            <div class="col-3">
-                <label for="inputAddress" class="form-label">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
+            <div className="col-3">
+                <label for="address" className="form-label">Address</label>
+                <input type="text" className="form-control" onChange= {handleInputs} name="address" id="address" placeholder="1234 Main St" />
             </div>
-            <div class="col-md-3">
-                <label for="inputState" class="form-label">State</label>
-                <select id="inputState" class="form-select">
+            <div className="col-md-3">
+                <label for="state" className="form-label">State</label>
+                <select id="state" name="state" className="form-select" onChange={handleInputs}>
                     <option selected>Choose...</option>
-                    <option>...</option>
+                    <option>Delhi</option>
+                    <option>Maharast</option>
+                    <option>karnataka</option>
+                    <option>Rajasthan</option>
+                    <option>Hariyana</option>
+                    <option>Punjab</option>
+
                 </select>
             </div>
-            <div class="col-md-3">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity" />
+            <div className="col-md-3">
+                <label for="city" className="form-label">City</label>
+                <input type="text" className="form-control" name="city" onChange= {handleInputs} id="city" />
             </div>
 
-            <div class="col-md-1">
-                <label for="inputState" class="form-label">Hotel Type</label>
-                <select id="inputState" class="form-select">
+            <div className="col-md-1">
+                <label for="inputState" className="form-label">Hotel Type</label>
+                <select id="inputState" className="form-select" onChange= {handleInputs} name="inputState">
                     <option selected>Hotels</option>
                     <option selected>Hostel</option>
                     <option>Vacation</option>
                 </select>
             </div>
-            <div class="col-md-2">
-                <label for="inputZip" class="form-label">Contact No</label>
-                <input type="text" class="form-control" id="inputZip" />
+            <div className="col-md-2">
+                <label for="contactNo" className="form-label">Contact No</label>
+                <input type="number" className="form-control" name="contactNo" onChange= {handleInputs} id="contactNo" />
             </div>
-            <div class="col-6">
-                <label for="formFile" class="form-label">Images Uploads</label>
-                <input class="form-control" type="file" id="formFile" />
+            <div className="col-6">
+                <label for="formFile" className="form-label">Images Uploads</label>
+                <input className="form-control" type="file"  name="formFile" onChange= {handleInputs} id="formFile" />
             </div>
 
 
 
             <h2>Service Available</h2>
 
-            <div class="col-md-3">
-                <label for="inputEmail4" class="form-label">Amenities</label>
-                <input type="email" class="form-control" id="inputEmail4" />
+            <div className="col-md-3">
+                <label for="inputEmail4" className="form-label">Amenities</label>
+                <input type="email" className="form-control" id="inputEmail4" />
             </div>
-            <div class="col-md-3">
-                <label for="inputState" class="form-label">Room Type</label>
-                <select id="inputState" class="form-select">
+            <div className="col-md-3">
+                <label for="inputState" className="form-label">Room Type</label>
+                <select id="inputState" className="form-select">
                     <option selected>Single Room</option>
                     <option>Family</option>
                     <option>Hall Room</option>
@@ -71,64 +131,63 @@ const AddHotel = () => {
 
                 </select>
             </div>
-            <div class="col-md-3">
-                <label for="inputPassword4" class="form-label">Basic</label>
-                <input type="password" class="form-control" id="inputPassword4" />
+            <div className="col-md-3">
+                <label for="password" className="form-label">Basic</label>
+                <input type="password" className="form-control" onChange={handleInputs} id="password" />
             </div>
-            <div class="col-md-3">
-                <label for="inputEmail4" class="form-label">Health Safety</label>
-                <input type="email" class="form-control" id="inputEmail4" />
+            <div className="col-md-3">
+                <label for="inputEmail4" className="form-label">Health Safety</label>
+                <input type="text" className="form-control" onChange={handleInputs} id="inputEmail4" />
             </div>
             
-            <div className="col-md-6"> 
+            <div classNameName="col-md-6"> 
             <lable>Fun Things :-  </lable>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
-                    <label class="form-check-label" for="inlineCheckbox1">Restaurant</label>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+                    <label className="form-check-label" for="inlineCheckbox1">Restaurant</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                    <label class="form-check-label" for="inlineCheckbox2">Dance Bar</label>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+                    <label className="form-check-label" for="inlineCheckbox2">Dance Bar</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                    <label class="form-check-label" for="inlineCheckbox2">Game activity</label>
-                </div>
-            </div>
-
-            <div className="col-md-6"> Parking :-  
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
-                    <label class="form-check-label" for="inlineCheckbox1">Available</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-                    <label class="form-check-label" for="inlineCheckbox2">Dance Bar</label>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+                    <label className="form-check-label" for="inlineCheckbox2">Game activity</label>
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <label for="inputState" class="form-label">Food Type</label>
-                <select id="inputState" class="form-select">
+            <div classNameName="col-md-6"> Parking :-  
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
+                    <label className="form-check-label" for="inlineCheckbox1">Available</label>
+                </div>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
+                    <label className="form-check-label" for="inlineCheckbox2">Dance Bar</label>
+                </div>
+            </div>
+
+            <div className="col-md-3">
+                <label for="inputState" className="form-label">Food Type</label>
+                <select id="inputState" className="form-select">
                     <option selected>Snack</option>
                     <option>Breakfast</option>
                     <option>Lunch</option>
                     <option>Dinner</option>
                     <option>Drink</option>
-
                 </select>
             </div>
 
-            <div class="col-12">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck" />
-                    <label class="form-check-label" for="gridCheck">
+            <div className="col-12">
+                <div className="form-check">
+                    <input className="form-check-input" type="checkbox" id="gridCheck" />
+                    <label className="form-check-label" for="gridCheck">
                         Check me out
                     </label>
                 </div>
             </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+            <div className="col-12">
+                <input type="submit" className="form-submit" name="addhotel" id="addhotel" onClick={addhotelInf}/>
             </div>
 
 

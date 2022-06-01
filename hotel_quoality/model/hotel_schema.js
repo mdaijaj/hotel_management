@@ -32,7 +32,7 @@ var hotel_schema=  new Schema({
     },
     rent: {
         type: Number,
-        required: true,
+        // required: true,
         maxLength: [8, "Price cannot exteed 8 charactor"]
     },
     hotelType:{
