@@ -3,7 +3,19 @@ const Hotels= require('../model/hotel_schema')
 //add hotel admin only
 const addHotel= async (req, res)=>{
     try{
-        const hotelData= await Hotels.create(req.body)
+        console.log("req.body", req.body.hotelInf)
+        const hotelInfo= req.body.hotelInf
+        const hotelData= await Hotels.create({
+            hotel_name: hotelInfo.hotel_name, 
+            description: hotelInfo.description, 
+            email: hotelInfo.email,
+            address: hotelInfo.address,
+            contactNo: hotelInfo.contactNo,
+            rent: hotelInfo.rent,
+            hoteltype:  hotelInfo.hotelType,
+            role: hotelInfo.role
+        })
+        console.log("kishan", hotelData)
         return res.status(200).send({
             message:"admin hotel add succuess", 
             data: hotelData
@@ -19,6 +31,7 @@ const addHotel= async (req, res)=>{
 const allHotels= async (req, res)=>{
     try{
         const hotelData= await Hotels.find()
+        console.log('hotelData', hotelData)
         return res.status(200).send({
             message:"get all hotel list ", 
             data: hotelData

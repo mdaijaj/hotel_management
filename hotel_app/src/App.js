@@ -27,8 +27,8 @@ const App=()=> {
     <div className="App">
       <Navbar/>
       <center><h1>Hotel Quality</h1></center>
-      <AddHotel/>
-      {/* <DatePickers/> */}
+      {/* <AddHotel/> */}
+      <DatePickers/>
     </div>
     </>
   );

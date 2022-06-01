@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 
-// const SearchFilter=()=>{
-//     alert("Hello! I am an alert box!!");
-// }
 
 
 const DatePickers = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    // const [hotelList, setHotelList] = useState([])
+
+    const getAllHotel= async ()=> {
+        console.log("dddd")
+        const res = await axios.get('/allhotels');
+        const newRes = await res.json()
+        console.log("response", newRes)
+        // const user= response.json()
+        // response.then(()=>{
+        // })
+        // setHotelList(users)
+        // return await response.json();
+    }
+
+    useEffect(()=>{
+        getAllHotel()
+    }, [])
+    
+    
+    
+   
+    
 
     return (
         <>
@@ -73,7 +92,27 @@ const DatePickers = () => {
                     
                 </form>
             </div>
+            <center><h1>Business page</h1></center>
+            <div class="row row-cols-2 row.d-flex row-cols-md-4 g-4">
+                {/* {console.log("hotelList", hotelList)} */}
+            {
+            // hotelList.data.data.map((hotel=> {
+            //     return(
+            //         <div class="col">
+            //             <div className="card"  style={{width: "18rem"}}>
+            //             <img className="card-img-top" src="..." alt="Card image cap"/>
+            //             <div className="card-body">
+            //                 <h5 className="card-title">Card title</h5>
+            //                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            //                 <a href="#" className="btn btn-primary">Hotel</a>
+            //             </div>
+            //             </div>
+            //         </div>
+            //     )
+            // }))
+        }
 
+        </div>  
         </>
     );
 };

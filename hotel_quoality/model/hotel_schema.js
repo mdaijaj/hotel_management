@@ -40,11 +40,11 @@ var hotel_schema=  new Schema({
         enum : ['hotels','hostels', 'vacation'],
         default: 'hotels'
     },
-    role:{
-        type: String,
-        enum : ['user','admin'],
-        default: 'user'
-    },
+    // role:{
+    //     type: String,
+    //     enum : ['user','admin'],
+    //     default: 'user'
+    // },
     isActive: {
         type: Boolean,
         default: true
