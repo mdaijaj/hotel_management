@@ -9,16 +9,20 @@ var hotel_schema=  new Schema({
     },
     description: {
         type: String,
-        required: true,
+        // required: true,
         trim: true
     },
     address: {
-        state: {
-            type: String,
-        },
-        city: {
-            type:String,
-        }
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        // required: true
     },
     contactNo: {
         type: Number,
@@ -32,7 +36,6 @@ var hotel_schema=  new Schema({
     },
     rent: {
         type: Number,
-        // required: true,
         maxLength: [8, "Price cannot exteed 8 charactor"]
     },
     hotelType:{
@@ -40,11 +43,10 @@ var hotel_schema=  new Schema({
         enum : ['hotels','hostels', 'vacation'],
         default: 'hotels'
     },
-    // role:{
-    //     type: String,
-    //     enum : ['user','admin'],
-    //     default: 'user'
-    // },
+    guest:{
+        type: Number,
+        maxLength: [5, "One room maximum guest only 5"]
+    },
     isActive: {
         type: Boolean,
         default: true
@@ -71,6 +73,11 @@ var hotel_schema=  new Schema({
     //         } 
     //     }
     // ],
+        // role:{
+    //     type: String,
+    //     enum : ['user','admin'],
+    //     default: 'user'
+    // },
 
 }, {
     timestamps: true

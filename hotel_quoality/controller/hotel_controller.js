@@ -1,4 +1,5 @@
 const Hotels= require('../model/hotel_schema')
+const { search } = require('../routes')
 
 //add hotel admin only
 const addHotel= async (req, res)=>{
@@ -13,7 +14,12 @@ const addHotel= async (req, res)=>{
             contactNo: hotelInfo.contactNo,
             rent: hotelInfo.rent,
             hoteltype:  hotelInfo.hotelType,
-            role: hotelInfo.role
+            role: hotelInfo.role,
+            guest: hotelInfo.guest,
+            checkIn: hotelInfo.startDate,
+            checkOut: hotelInfo.endDate,
+            state: hotelInfo.state,
+            city: hotelInfo.city
         })
         console.log("kishan", hotelData)
         return res.status(200).send({
@@ -94,10 +100,32 @@ const deleteHotel= async (req, res)=>{
 }
 
 
+//search hotel
+const searchHotel= async(req,res)=>{
+    try{
+        const {city, hotelType, guest, checkIn, checkOut}= req.query
+        const searchInfo= await Hotels.find({
+            destination: city,
+            hotelType: hotelType,
+            guest: guest,
+            checkIn: checkIn,
+            checkOut: checkOut,
+        })
+        console.log("searchInfo", searchInfo)
+        return res.send({
+            message: "find hotel successfully!", data: searchInfo
+        })
+    }catch(err){
+        console.log(err.message)
+    }
+}
+
+
 module.exports= {
     addHotel,
     allHotels,
     hotelDetails,
     updateHotel,
-    deleteHotel
+    deleteHotel,
+    searchHotel
 }

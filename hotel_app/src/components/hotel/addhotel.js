@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from 'axios'
+import DatePicker from "react-datepicker";
 
 const AddHotel = () => {
     const [hoteldata, setHoteldata] = useState({
@@ -12,7 +13,11 @@ const AddHotel = () => {
         rent: "",
         hoteltype: "",
         role: "",
+        city: "",
+        guest: "",
     });
+     const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     
     let name, value;
     const handleInputs= async(event)=>{
@@ -25,8 +30,8 @@ const AddHotel = () => {
 
     const addhotelInf= async(e)=>{
         e.preventDefault();
-        const {hotel_name, description, email, password, address, contactNo, rent, hoteltype,role}= hoteldata ;
-        const hotelInf= {hotel_name, description,email, password, address, contactNo, rent, hoteltype, role}
+        const {hotel_name, description, email, password, address, contactNo, rent, hoteltype,role, city, guest}= hoteldata ;
+        const hotelInf= {hotel_name, description,email, password, address, contactNo, rent, hoteltype, role, hoteltype,role, city, startDate,guest, endDate}
         console.log("hoteldata", hotelInf)
         // const requestOptions = {
         //     headers: { 'Content-Type': 'application/json' },
@@ -87,7 +92,6 @@ const AddHotel = () => {
                     <option>Rajasthan</option>
                     <option>Hariyana</option>
                     <option>Punjab</option>
-
                 </select>
             </div>
             <div className="col-md-3">
@@ -96,8 +100,8 @@ const AddHotel = () => {
             </div>
 
             <div className="col-md-1">
-                <label for="inputState" className="form-label">Hotel Type</label>
-                <select id="inputState" className="form-select" onChange= {handleInputs} name="inputState">
+                <label for="hoteltype" className="form-label">Hotel Type</label>
+                <select id="hoteltype" className="form-select" onChange= {handleInputs} name="hoteltype">
                     <option selected>Hotels</option>
                     <option selected>Hostel</option>
                     <option>Vacation</option>
@@ -107,11 +111,34 @@ const AddHotel = () => {
                 <label for="contactNo" className="form-label">Contact No</label>
                 <input type="number" className="form-control" name="contactNo" onChange= {handleInputs} id="contactNo" />
             </div>
+
+            <div className="col-md-1">
+                <label for="guest" className="form-label">Guest</label>
+                <select id="guest" className="form-select" onChange= {handleInputs} name="guest">
+                    <option selected>no guest</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+
+            <div className="col-3">
+            <label>CheckOut</label>
+                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+            </div>
+            
+            <div className="col-3">
+                <label>CheckIn</label>
+                <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+            </div>
+            
+            
             <div className="col-6">
                 <label for="formFile" className="form-label">Images Uploads</label>
                 <input className="form-control" type="file"  name="formFile" onChange= {handleInputs} id="formFile" />
             </div>
-
 
 
             <h2>Service Available</h2>

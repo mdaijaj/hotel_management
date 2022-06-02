@@ -33,6 +33,9 @@ router.get('/hoteldetails/:id', hotel.hotelDetails)
 router.put('/updatehotel/:id',login_required, hotel.updateHotel)
 router.delete('/deletehotel/:id', login_required, hotel.deleteHotel)
 
+//search hotel
+router.get('/searchhotel', hotel.searchHotel)
+
 
 // routes for service crude
 router.post('/createservice', service.addService)
