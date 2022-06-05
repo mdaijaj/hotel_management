@@ -20,16 +20,16 @@ var hotelServiceSchema=  new Schema({
         type: String,
         trim: true
     },
-    healthSafety: {
+    health: {
         type: String,
     },
     transport:{
         type:String
     },
-    fun_things: {
+    funThings: {
         type: String,
     },
-    hotel_id: {
+    hotelId: {
         type: mongoose.Schema.ObjectId,
         ref: "Hotel",
         required: [false, "please enter your hotel"],

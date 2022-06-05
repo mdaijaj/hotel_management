@@ -9,32 +9,28 @@ const DatePickers = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [hotelList, setHotelList] = useState([])
-    const [searchhotel, setSearchHotel] = useState('')
+    const [findhotel, setFindhotel] = useState([])
+    const [destination, setDestination]= useState(null)
 
     const getAllHotel = async () => {
         console.log("dddd")
         const response = await axios.get('/allhotels');
         console.log("response", response)
         setHotelList(...hotelList, response)
+        setFindhotel(response.data.data)
         // return response
     }
 
     const searchHotelInf= async()=>{
-        const searchHotels= await axios.get('/searchhotel');
-        console.log(searchHotels)
-        setSearchHotel(...searchhotel, searchHotels)
-        // return searchHotels
+        // const searchHotels= await axios.get('/searchhotel');
+        // console.log("searchHotels", searchHotels)
+        console.log("aijaj", hotelList)
+        setFindhotel(hotelList.data.data.filter(e=> e.city==destination))
     }
 
     useEffect(() => {
         getAllHotel()
-        searchHotelInf()
     }, [])
-
-
-
-
-
 
     return (
         <>
@@ -44,7 +40,7 @@ const DatePickers = () => {
                         <div className="row">
                             <div className="col-3">
                                 <label /> Destination:
-                                <input type="text" className="form-control" placeholder="Enter City...." />
+                                <input type="text" className="form-control" onChange={(e)=> setDestination(e.target.value) } placeholder="Enter City...." />
                             </div>
 
                             <div className="col-2">
@@ -77,29 +73,32 @@ const DatePickers = () => {
                             </div>
 
                             <div className="col-2">
-                                <label>CheckIn</label>
-                                <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
-                            </div>
-
-                            <div className="col-2">
                                 <label>CheckOut</label>
                                 <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                             </div>
 
+                            <div className="col-2">
+                                <label>CheckIn</label>
+                                <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+                            </div>
+
 
                             <div className="col-2 pt-4">
-                                <button type="submit" onClick={"SearchFilter()"}>Search</button>
+                                <button type="button" onClick={searchHotelInf}>Search</button>
                             </div>
                         </div>
                     </div>
 
                 </form>
-            </div>
+                {/* <div className="col-12 d-flex justify-content-center">
+                    <button type="button" onClick={getAllHotel}>SHOW All Hotel</button>
+                </div> */}
+        </div>
             <center><h1>Recenctly Hotel Search....</h1></center><br />
             <div className="row row-cols-2 row.d-flex row-cols-md-4 g-4">
-                {console.log("hotelList", hotelList)}
+                {console.log("findhotel", findhotel)}
                 {
-                    hotelList.data.data.map((hotel => {
+                    findhotel?.map((hotel => {
                         return (
                             <div className="col-10 d-flex justify-content-center">
                                 <div className="card" style={{ width: "35rem", borderRadius: "20px" }}>
@@ -111,7 +110,6 @@ const DatePickers = () => {
                                         <p className="card-text">{`numOfReviews: ${hotel.numOfReviews}`}</p>
                                         <p className="card-text">{`price: ${hotel.price}`}</p>
                                         <p className="card-text">{`rating: ${hotel.rating}`}</p>
-
                                         <a href="#" className="btn btn-primary">Hotel</a>
                                     </div>
                                 </div>

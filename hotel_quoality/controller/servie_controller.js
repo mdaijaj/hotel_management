@@ -3,7 +3,19 @@ const Service= require('../model/service_schema')
 //add service
 const addService= async (req, res)=>{
     try{
-        const serviceData= await Service.create(req.body)
+        console.log("req.body", req.body.serviceInf)
+        const serviceInfo= req.body.serviceInf
+        const serviceData= await Service.create({
+            hotelId: serviceInfo.hotelId, 
+            hotel_name: serviceInfo.hotel_name, 
+            amenities: serviceInfo.amenities,
+            basic: serviceInfo.basic,
+            foodType: serviceInfo.foodType,
+            fun_things:  serviceInfo.funThings,
+            health: serviceInfo.health,
+            parking: serviceInfo.transport,
+            roomtype: serviceInfo.roomType
+        })
         return res.status(200).send({
             message:"add service success!", 
             data: serviceData

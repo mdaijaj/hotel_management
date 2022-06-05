@@ -107,9 +107,6 @@ const searchHotel= async(req,res)=>{
         const searchInfo= await Hotels.find({
             destination: city,
             hotelType: hotelType,
-            guest: guest,
-            checkIn: checkIn,
-            checkOut: checkOut,
         })
         console.log("searchInfo", searchInfo)
         return res.send({
