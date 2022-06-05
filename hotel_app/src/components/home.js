@@ -22,8 +22,6 @@ const DatePickers = () => {
     }
 
     const searchHotelInf= async()=>{
-        // const searchHotels= await axios.get('/searchhotel');
-        // console.log("searchHotels", searchHotels)
         console.log("aijaj", hotelList)
         setFindhotel(hotelList.data.data.filter(e=> e.city==destination))
     }
@@ -88,11 +86,7 @@ const DatePickers = () => {
                             </div>
                         </div>
                     </div>
-
                 </form>
-                {/* <div className="col-12 d-flex justify-content-center">
-                    <button type="button" onClick={getAllHotel}>SHOW All Hotel</button>
-                </div> */}
         </div>
             <center><h1>Recenctly Hotel Search....</h1></center><br />
             <div className="row row-cols-2 row.d-flex row-cols-md-4 g-4">

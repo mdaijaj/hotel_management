@@ -30,8 +30,8 @@ const AddHotel = () => {
 
     const addhotelInf= async(e)=>{
         e.preventDefault();
-        const {hotel_name, description, email, password, address, contactNo, rent, hoteltype,role, city, guest}= hoteldata ;
-        const hotelInf= {hotel_name, description,email, password, address, contactNo, rent, hoteltype, role, hoteltype,role, city, startDate,guest, endDate}
+        const {hotel_name, description, email, password, address, contactNo, rent, hoteltype,role, state, city, guest}= hoteldata ;
+        const hotelInf= {hotel_name, description,email, password, address, contactNo, rent, hoteltype,role, state, hoteltype,role, city, startDate,guest, endDate}
         console.log("hoteldata", hotelInf)
         const res= await axios.post('/addhotel', {hotelInf})
         console.log("res", res)

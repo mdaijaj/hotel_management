@@ -5,15 +5,16 @@ const addService= async (req, res)=>{
     try{
         console.log("req.body", req.body.serviceInf)
         const serviceInfo= req.body.serviceInf
+        console.log("serviceInfo:-", serviceInfo)
         const serviceData= await Service.create({
             hotelId: serviceInfo.hotelId, 
             hotel_name: serviceInfo.hotel_name, 
             amenities: serviceInfo.amenities,
             basic: serviceInfo.basic,
             foodType: serviceInfo.foodType,
-            fun_things:  serviceInfo.funThings,
+            funThings:  serviceInfo.funThings,
             health: serviceInfo.health,
-            parking: serviceInfo.transport,
+            transport: serviceInfo.transport,
             roomtype: serviceInfo.roomType
         })
         return res.status(200).send({

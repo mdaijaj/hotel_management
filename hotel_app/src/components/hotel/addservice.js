@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import axios from 'axios'
-import DatePicker from "react-datepicker";
 
 const ServiceAdd = () => {
     const [serviceData, setService] = useState({
@@ -18,6 +17,7 @@ const ServiceAdd = () => {
         name= event.target.name
         value= event.target.value
         console.log("value", value)
+        console.log("serviceData", serviceData)
         setService({...serviceData, [name]: value})  //[] dynamic data for
     }
 
@@ -49,15 +49,8 @@ const ServiceAdd = () => {
                 <input type="text" className="form-control" name="hotelId" id="inputEmail4" />
             </div>
             <div className="col-md-4">
-                <label for="inputState" className="form-label">Hotel Name</label>
-                <select id="inputState" className="form-select" name="hotel_name">
-                    <option selected>Single Room</option>
-                    <option>Family</option>
-                    <option>Hall Room</option>
-                    <option>Double Room</option>
-                    <option>Friend Room</option>
-
-                </select>
+                <label for="inputEmail4" className="form-label">Hotel Name</label>
+                <input type="text" className="form-control" name="hotel_name" id="inputEmail4" />
             </div>
             <div className="col-md-4">
                 <label for="inputEmail4" className="form-label">Amenities</label>
@@ -71,7 +64,6 @@ const ServiceAdd = () => {
                     <option>Hall Room</option>
                     <option>Double Room</option>
                     <option>Friend Room</option>
-
                 </select>
             </div>
             <div className="col-md-4">
