@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios'
+import "../../App.css"  //22
+
 
 const ServiceAdd = () => {
     const [serviceData, setService] = useState({

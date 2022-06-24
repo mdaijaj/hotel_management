@@ -28,13 +28,21 @@ var hotel_schema=  new Schema({
         type: Number,
         trim: true
     },
+    numberOfReviews: {
+        type: Number,
+        trim: true
+    },
+    rating: {
+        type: Number,
+        trim: true
+    },
     checkIn: {
         type: Date,
     },
     checkOut: {
         type: Date,
     },
-    rent: {
+    price: {
         type: Number,
         maxLength: [8, "Price cannot exteed 8 charactor"]
     },
