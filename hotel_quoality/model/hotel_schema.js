@@ -34,6 +34,8 @@ var hotel_schema=  new Schema({
     },
     rating: {
         type: Number,
+        min: 0,
+        max: 5,
         trim: true
     },
     checkIn: {
@@ -69,6 +71,11 @@ var hotel_schema=  new Schema({
         required: [false, "please enter your service Id"],
         strictPopulate: false
     },
+    distance: {
+        type: Number,
+        trim: false,
+    },
+    images: [String]
     // images: [
     //     {
     //         public_id: {

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import { NavLink } from "react-router-dom";
 import '../App.css'
 import images from '../images.jpeg'
 
@@ -10,7 +11,8 @@ const DatePickers = () => {
     const [endDate, setEndDate] = useState(new Date());
     const [hotelList, setHotelList] = useState([])
     const [findhotel, setFindhotel] = useState([])
-    const [destination, setDestination]= useState(null)
+    const [destination, setDestination] = useState(null)
+    const [loading, setLoading]= useState(null)
 
     const getAllHotel = async () => {
         console.log("dddd")
@@ -21,9 +23,14 @@ const DatePickers = () => {
         // return response
     }
 
-    const searchHotelInf= async()=>{
+    const searchHotelInf = async () => {
         console.log("aijaj", hotelList)
-        setFindhotel(hotelList.data.data.filter(e=> e.city==destination))
+        setFindhotel(hotelList.data.data.filter(e => e.city == destination))
+    }
+
+
+    const hotelDetails=()=>{
+        console.log("hotelDetails")
     }
 
     useEffect(() => {
@@ -38,7 +45,7 @@ const DatePickers = () => {
                         <div className="row">
                             <div className="col-3">
                                 <label /> Destination:
-                                <input type="text" className="form-control" onChange={(e)=> setDestination(e.target.value) } placeholder="Enter City...." />
+                                <input type="text" className="form-control" onChange={(e) => setDestination(e.target.value)} placeholder="Enter City...." />
                             </div>
 
                             <div className="col-2">
@@ -49,7 +56,6 @@ const DatePickers = () => {
                                     <option>Double Bedroom</option>
                                     <option>Family Room</option>
                                     <option>Hall Room</option>
-
                                 </select>
                             </div>
 
@@ -87,9 +93,11 @@ const DatePickers = () => {
                         </div>
                     </div>
                 </form>
-        </div>
+            </div>
             <center><h1>Recenctly Hotel Search....</h1></center><br />
             <div className="row row-cols-2 row.d-flex row-cols-md-4 g-4">
+            {loading? "please wait data is loading": ""}
+
                 {console.log("findhotel", findhotel)}
                 {
                     findhotel?.map((hotel => {
@@ -104,7 +112,8 @@ const DatePickers = () => {
                                         <p className="card-text">{`numOfReviews: ${hotel.numOfReviews}`}</p>
                                         <p className="card-text">{`price: ${hotel.price}`}</p>
                                         <p className="card-text">{`rating: ${hotel.rating}`}</p>
-                                        <a href="#" className="btn btn-primary">Hotel</a>
+                                        <NavLink to={'/hoteldetails'} className="btn btn-primary">Hotel</NavLink>
+                                        {/* <button className="btn btn-primary" onClick={hotelDetails}>Hotel</button> */}
                                     </div>
                                 </div>
                             </div>

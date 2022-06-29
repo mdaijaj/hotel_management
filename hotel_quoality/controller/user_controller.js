@@ -11,9 +11,9 @@ const signup= async (req,res)=>{
             email,
             mobile,
             password,
-            confirm_password
         }= req.body;
-        if(!name || !email || !mobile || !password || !confirm_password){
+        console.log(req.body)
+        if(!name || !email || !mobile || !password){
             console.log("please fill all fields");
         }
 
@@ -25,7 +25,7 @@ const signup= async (req,res)=>{
             return res.send("already exit")
             // res.send("email is already exits in your db...")
         }else{
-            const user= new User({name, email, mobile, password, confirm_password})
+            const user= new User({name, email, mobile, password})
             // console.log("user...", user)
             await user.save();
             res.status(200).send({message:"inserted data success"});

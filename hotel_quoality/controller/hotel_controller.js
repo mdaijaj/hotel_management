@@ -1,5 +1,4 @@
 const Hotels= require('../model/hotel_schema')
-const { search } = require('../routes')
 
 //add hotel admin only
 const addHotel= async (req, res)=>{

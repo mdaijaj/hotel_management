@@ -60,3 +60,11 @@ var hotelServiceSchema=  new Schema({
 
 const Service=mongoose.model('Service', hotelServiceSchema);
 module.exports= Service;
+
+
+
+//titile
+//price
+// desc
+// maxpeople
+// roomnum[]
